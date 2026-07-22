@@ -141,7 +141,13 @@
 
       <!-- Right: Form -->
       <div class="contact-form-wrap reveal">
-        <form id="contactForm" class="contact-form">
+        <!-- FormSubmit.co automatically sends the submission to info@primeshield.co.ke -->
+        <form id="contactForm" class="contact-form" action="https://formsubmit.co/ajax/info@primeshield.co.ke" method="POST">
+          
+          <!-- Hidden inputs for FormSubmit configuration -->
+          <input type="hidden" name="_subject" value="New Security Inquiry from Website">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           
           <div class="form-row">
             <div class="form-field">

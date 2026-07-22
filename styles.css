@@ -418,3 +418,16 @@ body.no-scroll { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Toast Notification */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 9500;
+  padding: 18px 28px; background: var(--charcoal);
+  border: 1px solid var(--brass); color: var(--parchment);
+  transform: translateY(120%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; align-items: center; gap: 16px; max-width: 350px;
+}
+.toast.show { transform: translateY(0); }
+.toast-dot { width: 8px; height: 8px; background: var(--brass); border-radius: 50%; animation: pulse 1.5s infinite; }
+.toast-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--brass); letter-spacing: 0.2em; text-transform: uppercase; }
+.toast-msg { font-size: 14px; color: var(--parchment); margin-top: 4px; }

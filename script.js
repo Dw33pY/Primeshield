@@ -192,10 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ---------- 8. CONTACT FORM HANDLER ----------
+    // ---------- 8. CONTACT FORM HANDLER ----------
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -204,40 +204,57 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
       
-      // Simulate AJAX submission
-      setTimeout(() => {
-        // Create and show toast
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerHTML = `
-          <div class="toast-dot"></div>
-          <div>
-            <div class="toast-title">Transmission Received</div>
-            <div class="toast-msg">We will respond within one business day.</div>
-          </div>
-        `;
-        document.body.appendChild(toast);
+      try {
+        // Gather form data
+        const formData = new FormData(form);
+        const object = {};
+        formData.forEach((value, key) => { object[key] = value; });
+        const json = JSON.stringify(object);
         
-        // Animate toast in
-        setTimeout(() => toast.classList.add('show'), 100);
+        // Send data to FormSubmit.co
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: json
+        });
         
-        // Remove toast after 4s
-        setTimeout(() => {
-          toast.classList.remove('show');
-          setTimeout(() => toast.remove(), 500);
-        }, 4000);
-        
-        // Reset form
-        form.reset();
-        const selectVal = form.querySelector('.select-value');
-        if (selectVal) {
-          selectVal.textContent = 'Service Required';
-          selectVal.classList.add('placeholder');
+        if (response.ok) {
+          // Create and show success toast
+          const toast = document.createElement('div');
+          toast.className = 'toast';
+          toast.innerHTML = `
+            <div class="toast-dot"></div>
+            <div>
+              <div class="toast-title">Transmission Received</div>
+              <div class="toast-msg">We will respond within one business day.</div>
+            </div>
+          `;
+          document.body.appendChild(toast);
+          
+          setTimeout(() => toast.classList.add('show'), 100);
+          
+          setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+          }, 4000);
+          
+          // Reset form
+          form.reset();
+          const selectVal = form.querySelector('.select-value');
+          if (selectVal) {
+            selectVal.textContent = 'Service Required';
+            selectVal.classList.add('placeholder');
+          }
+        } else {
+          alert('Submission failed. Please email us directly at info@primeshield.co.ke');
         }
+      } catch (error) {
+        alert('Network error. Please try again later.');
+      } finally {
         submitBtn.innerHTML = originalContent;
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
-      }, 1200);
+      }
     });
   }
 
