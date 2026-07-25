@@ -13,16 +13,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- 1. INITIALIZATION & LOADER ----------
-  // Lock scroll immediately on load
-  lockScroll();
-  
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-      unlockScroll();
-      revealHeroLetters();
-    }, 800);
-  });
+  const loader = document.getElementById('loader');
+
+  if (loader) {
+    lockScroll();
+    window.addEventListener('load', () => {
+      const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+      const delay = isHomePage ? 3000 : 800; // 3s on home, 800ms fallback
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        unlockScroll();
+        revealHeroLetters();
+      }, delay);
+    });
+  } else {
+    // If no loader (other pages), unlock scroll immediately
+    unlockScroll();
+  }
 
   // Set current year in footer
   const yearEl = document.getElementById('year');
@@ -52,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateRing();
 
-    // Cursor hover effect on interactive elements
     const hoverables = document.querySelectorAll('a, button, .magnetic, .value-card, .preview-card, .custom-check, .select-trigger, .option');
     hoverables.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
@@ -105,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
-        observer.unobserve(entry.target); // Stop observing once revealed
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
@@ -150,17 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenInput = select.querySelector('input[type="hidden"]');
 
     trigger.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent document click listener from closing it immediately
+      e.stopPropagation();
       const isOpen = select.classList.contains('open');
-      
-      // Close all other selects
       customSelects.forEach(s => s.classList.remove('open'));
-      
       if (!isOpen) {
         select.classList.add('open');
-        // Optional: Lock scroll only if the dropdown content is long enough to require it,
-        // but for simplicity and UX, we'll allow background scroll lock if needed.
-        // For short dropdowns, just letting them overlay is better.
       }
     });
 
@@ -175,24 +175,21 @@ document.addEventListener('DOMContentLoaded', () => {
       opt.addEventListener('click', () => {
         const value = opt.dataset.value;
         const text = opt.textContent;
-        
         valueDisplay.textContent = text;
         valueDisplay.classList.remove('placeholder');
         hiddenInput.value = value;
-        
         select.classList.remove('open');
       });
     });
   });
 
-  // Close custom select if clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.custom-select')) {
       customSelects.forEach(s => s.classList.remove('open'));
     }
   });
 
-    // ---------- 8. CONTACT FORM HANDLER ----------
+  // ---------- 8. CONTACT FORM HANDLER ----------
   const form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -205,21 +202,18 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.style.opacity = '0.7';
       
       try {
-        // Gather form data
         const formData = new FormData(form);
         const object = {};
         formData.forEach((value, key) => { object[key] = value; });
         const json = JSON.stringify(object);
-        
-        // Send data to FormSubmit.co
+
         const response = await fetch(form.action, {
           method: "POST",
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: json
         });
-        
+
         if (response.ok) {
-          // Create and show success toast
           const toast = document.createElement('div');
           toast.className = 'toast';
           toast.innerHTML = `
@@ -238,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => toast.remove(), 500);
           }, 4000);
           
-          // Reset form
           form.reset();
           const selectVal = form.querySelector('.select-value');
           if (selectVal) {
@@ -277,12 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
         span.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
         span.style.transitionDelay = `${i * 40}ms`;
         
-        // Preserve italic styling for the second line
         if (line.id === 'heroLine2') span.style.fontStyle = 'italic';
         
         line.appendChild(span);
         
-        // Trigger transition
         setTimeout(() => {
           span.style.opacity = '1';
           span.style.transform = 'translateY(0)';
@@ -310,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- CONSOLE SIGNATURE ----------
-  console.log('%cPRIMESHIELD SOLUTIONS LIMITED','color:#D4AF6F;font-family:serif;font-size:24px;font-weight:300;');
-  console.log('%cBuilt on Trust.','color:#F4F1E8;font-family:serif;font-size:14px;font-style:italic;');
-  console.log('%c→ Forged in vigilance by Dw33pY','color:#8E897C;font-family:monospace;font-size:11px;');
+  console.log('%cPRIMESHIELD SOLUTIONS LIMITED','color:#0244D0;font-family:serif;font-size:24px;font-weight:300;');
+  console.log('%cBuilt on Trust.','color:#051539;font-family:serif;font-size:14px;font-style:italic;');
+  console.log('%c→ Forged in vigilance by Dw33pY','color:#7A8599;font-family:monospace;font-size:11px;');
 });
