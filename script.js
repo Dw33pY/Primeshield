@@ -299,6 +299,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  
+  // ---------- 9. FAQ ACCORDION ----------
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const header = item.querySelector('.faq-header');
+    const content = item.querySelector('.faq-content');
+    
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      
+      // Close all items first
+      faqItems.forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-content').style.maxHeight = null;
+      });
+      
+      // If it was closed, open it
+      if (!isOpen) {
+        item.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
 
   // ---------- CONSOLE SIGNATURE ----------
   console.log('%cPRIMESHIELD SOLUTIONS LIMITED','color:#0244D0;font-family:serif;font-size:24px;font-weight:300;');

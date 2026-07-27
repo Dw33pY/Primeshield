@@ -468,3 +468,41 @@ body.no-scroll { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* ============================================================
+   FAQ ACCORDION STYLES
+   ============================================================ */
+.faq-section { padding: 120px 0; background: var(--bg-alt); }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); overflow: hidden; transition: background 0.3s; }
+.faq-item:hover { background: rgba(255, 255, 255, 0.5); }
+
+.faq-header { 
+  display: flex; justify-content: space-between; align-items: center; 
+  padding: 24px 16px; cursor: pointer; user-select: none; 
+}
+.faq-header span { 
+  font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; 
+  color: var(--navy); transition: color 0.3s; 
+}
+.faq-icon { 
+  width: 32px; height: 32px; background: rgba(2, 68, 208, 0.08); 
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+  flex-shrink: 0; transition: background 0.3s; 
+}
+.faq-icon svg { transition: transform 0.3s; }
+
+.faq-content { 
+  max-height: 0; overflow: hidden; 
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+.faq-content-inner { 
+  padding: 0 16px 24px 16px; color: var(--text-dim); 
+  line-height: 1.7; font-size: 15px; 
+}
+
+/* Open State */
+.faq-item.open .faq-icon { background: var(--royal); }
+.faq-item.open .faq-icon svg path { stroke: #ffffff; transition: stroke 0.3s; }
+.faq-item.open .faq-icon svg .faq-plus-v { opacity: 0; transition: opacity 0.3s; } /* Hides vertical line to make minus sign */
+.faq-item.open .faq-header span { color: var(--royal); }
