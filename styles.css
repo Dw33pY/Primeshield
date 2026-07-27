@@ -1,6 +1,6 @@
 /* ============================================================
    PRIMESHIELD SOLUTIONS — CSS ARCHITECTURE (WHITE THEME)
-   1. Variables & Resets
+   1. Variables & Cross-Browser Resets
    2. Typography & Base Elements
    3. Utilities & Helpers (Cursor, Loader, Grid)
    4. Navigation & Mobile Menu
@@ -32,17 +32,34 @@
   --border-strong: rgba(2, 68, 208, 0.3);
 }
 
-* { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* Universal Cross-Browser Reset */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+  -webkit-text-size-adjust: 100%; /* Prevents iOS font scaling */
+  text-size-adjust: 100%;
+}
+
 body {
   background: var(--bg-main);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   cursor: none;
+  text-rendering: optimizeLegibility;
 }
 body.no-scroll { overflow: hidden; }
-@media (max-width: 768px) { body { cursor: auto; } }
+@media (max-width: 768px) { 
+  body { cursor: auto; } 
+  html, body { overscroll-behavior: none; } /* Prevents rubber-band scrolling on iOS */
+}
 
 /* 2. TYPOGRAPHY */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -141,9 +158,10 @@ body.no-scroll { overflow: hidden; }
   background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--border);
   border-radius: 100px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; /* Added for cross-browser */
   box-shadow: 0 4px 20px rgba(5, 21, 57, 0.05);
 }
-.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
 .nav-logo-img { height: 36px; width: auto; }
 
 .nav-links { display: flex; gap: 40px; }
@@ -183,7 +201,7 @@ body.no-scroll { overflow: hidden; }
 
 /* 5. BUTTONS & FORMS */
 .btn-primary {
-  position: relative; display: inline-flex; align-items: center; gap: 12px;
+  position: relative; display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0;
   padding: 16px 32px; background: var(--royal); color: #ffffff;
   font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
   text-decoration: none; overflow: hidden; transition: transform 0.3s; border: none; cursor: pointer;
@@ -193,7 +211,7 @@ body.no-scroll { overflow: hidden; }
 .btn-primary span, .btn-primary svg { position: relative; z-index: 2; }
 
 .btn-ghost {
-  display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px;
+  display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px; flex-shrink: 0;
   border: 1px solid var(--border-strong); color: var(--navy);
   font-weight: 500; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
   text-decoration: none; background: transparent; transition: all 0.3s; cursor: pointer;
@@ -211,6 +229,9 @@ body.no-scroll { overflow: hidden; }
   width: 100%; padding: 18px 0 12px; background: transparent; border: none;
   border-bottom: 1px solid var(--border-strong); color: var(--navy);
   font-family: 'Inter', sans-serif; font-size: 15px; outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none; /* Removes iOS default styling */
+  appearance: none;
+  border-radius: 0; /* Removes iOS default rounding */
 }
 .form-field label {
   position: absolute; left: 0; top: 18px; font-size: 14px; color: var(--text-muted);
@@ -261,7 +282,13 @@ body.no-scroll { overflow: hidden; }
 
 /* 6. PAGE LAYOUTS */
 /* Hero */
-.hero-section { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 120px; padding-bottom: 60px; overflow: hidden; }
+.hero-section { 
+  position: relative; 
+  min-height: 100vh; 
+  min-height: 100svh; /* Modern browsers (fixes iOS address bar bug) */
+  min-height: 100dvh; /* Dynamic viewport height for newest browsers */
+  display: flex; align-items: center; padding-top: 120px; padding-bottom: 60px; overflow: hidden; 
+}
 .hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 80%; height: 60%; background: radial-gradient(circle, rgba(2, 68, 208, 0.08), transparent 60%); pointer-events: none; }
 .hero-container { width: 100%; }
 .hero-meta { display: flex; justify-content: space-between; margin-bottom: 60px; }
