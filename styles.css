@@ -506,3 +506,72 @@ body.no-scroll { overflow: hidden; }
 .faq-item.open .faq-icon svg path { stroke: #ffffff; transition: stroke 0.3s; }
 .faq-item.open .faq-icon svg .faq-plus-v { opacity: 0; transition: opacity 0.3s; } /* Hides vertical line to make minus sign */
 .faq-item.open .faq-header span { color: var(--royal); }
+
+/* ============================================================
+   CLIENTS CAROUSEL (Touch & Drag Enabled)
+   ============================================================ */
+.clients-carousel-section { 
+  padding: 25px 0; 
+  background: var(--bg-alt); /* Matches the FAQ section to blend perfectly */
+  overflow: hidden; 
+  margin-top: -100px;
+}
+
+.carousel-wrapper { 
+  width: 100%; 
+  overflow-x: scroll; 
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+  cursor: grab; 
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+}
+.carousel-wrapper::-webkit-scrollbar { 
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+.carousel-wrapper:active { 
+  cursor: grabbing; 
+}
+
+.carousel-track { 
+  display: flex; 
+  /* ==========================================
+   HOW TO CHANGE SPACE BETWEEN LOGOS:
+   Change the 'gap' value below. 
+   Currently it is 50px (reduced from 100px).
+   ========================================== */
+  gap: 50px; 
+  width: max-content; 
+  padding: 0 50px;
+}
+
+.carousel-slide { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100px; 
+}
+
+.carousel-slide img { 
+  /* ==========================================
+   HOW TO CHANGE LOGO SIZE:
+   Change the 'height' value below. 
+   Currently it is 85px (increased from 70px).
+   ========================================== */
+  height: 85px; 
+  width: auto; 
+  pointer-events: none; /* Prevents image drag ghosting */
+  user-select: none;
+  transition: transform 0.4s ease;
+}
+
+.carousel-slide:hover img { 
+  transform: scale(1.08); 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-track { gap: 20px; padding: 0 30px; } /* Space between logos on mobile */
+  .carousel-slide { height: 80px; }
+  .carousel-slide img { height: 72px; } /* Logo size on mobile */
+}
