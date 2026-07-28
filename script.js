@@ -323,17 +323,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-    // ---------- 10. CLIENTS CAROUSEL (Touch & Drag) ----------
+  // ---------- 10. CLIENTS CAROUSEL (Smart Auto-Looping) ----------
   const carouselWrapper = document.getElementById('logoCarousel');
   
   if (carouselWrapper) {
+    const track = carouselWrapper.querySelector('.carousel-track');
+    
+    // 1. Automatically duplicate logos until the track is wide enough to loop on any screen
+    // This prevents the "not moving on desktop" bug if there are too few logos.
+    while (track.scrollWidth < carouselWrapper.offsetWidth * 2) {
+      track.innerHTML += track.innerHTML;
+    }
+    
+    // 2. Interaction state
+    let isInteracting = false;
+    let resumeTime = 0;
     let isDown = false;
     let startX;
     let scrollLeft;
-    let isInteracting = false;
-    let resumeTime = 0;
-
-    // Mouse events (Desktop)
+    
+    // Mouse events (Desktop drag)
     carouselWrapper.addEventListener('mousedown', (e) => {
       isDown = true;
       isInteracting = true;
@@ -341,46 +350,48 @@ document.addEventListener('DOMContentLoaded', () => {
       startX = e.pageX - carouselWrapper.offsetLeft;
       scrollLeft = carouselWrapper.scrollLeft;
     });
-
+    
     carouselWrapper.addEventListener('mouseleave', () => {
       isDown = false;
       isInteracting = false;
       resumeTime = Date.now();
+      carouselWrapper.style.cursor = 'grab';
     });
-
+    
     carouselWrapper.addEventListener('mouseup', () => {
       isDown = false;
       isInteracting = false;
       resumeTime = Date.now();
       carouselWrapper.style.cursor = 'grab';
     });
-
+    
     carouselWrapper.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - carouselWrapper.offsetLeft;
-      const walk = (x - startX) * 1.5; 
+      const walk = (x - startX) * 1.5;
       carouselWrapper.scrollLeft = scrollLeft - walk;
     });
-
-    // Touch events (Mobile)
+    
+    // Touch events (Mobile swipe)
     carouselWrapper.addEventListener('touchstart', (e) => {
       isInteracting = true;
       startX = e.touches[0].pageX - carouselWrapper.offsetLeft;
       scrollLeft = carouselWrapper.scrollLeft;
     }, { passive: true });
-
+    
     carouselWrapper.addEventListener('touchend', () => {
       isInteracting = false;
       resumeTime = Date.now();
     });
-
-    // Auto-scroll loop
+    
+    // 3. Auto-scroll loop
     function autoScrollCarousel() {
       if (!isInteracting && Date.now() - resumeTime > 2500) {
-        carouselWrapper.scrollLeft += 1;
-        // If we've scrolled past the first set of logos, jump back to start
-        if (carouselWrapper.scrollLeft >= carouselWrapper.scrollWidth / 2) {
+        carouselWrapper.scrollLeft += 1; // Speed of scrolling (1px per frame)
+        
+        // If we've scrolled halfway (past the first set of original logos), jump back to start
+        if (carouselWrapper.scrollLeft >= track.scrollWidth / 2) {
           carouselWrapper.scrollLeft = 0;
         }
       }
