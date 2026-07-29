@@ -133,15 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animateCounter(counter) {
     const target = parseInt(counter.dataset.count);
+    const suffix = counter.dataset.suffix || ''; // Get the + or % symbol
     const duration = 1800;
     const start = performance.now();
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      counter.textContent = Math.floor(eased * target);
+      counter.textContent = Math.floor(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(update);
-      else counter.textContent = target;
+      else counter.textContent = target + suffix;
     }
     requestAnimationFrame(update);
   }
