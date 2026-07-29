@@ -43,7 +43,7 @@
 
 html { 
   scroll-behavior: smooth; 
-  -webkit-text-size-adjust: 100%; /* Prevents iOS font scaling */
+  -webkit-text-size-adjust: 100%; 
   text-size-adjust: 100%;
 }
 
@@ -58,7 +58,7 @@ body {
 body.no-scroll { overflow: hidden; }
 @media (max-width: 768px) { 
   body { cursor: auto; } 
-  html, body { overscroll-behavior: none; } /* Prevents rubber-band scrolling on iOS */
+  html, body { overscroll-behavior: none; } 
 }
 
 /* 2. TYPOGRAPHY */
@@ -158,7 +158,7 @@ body.no-scroll { overflow: hidden; }
   background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--border);
   border-radius: 100px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; /* Added for cross-browser */
+  flex-wrap: wrap; 
   box-shadow: 0 4px 20px rgba(5, 21, 57, 0.05);
 }
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
@@ -229,9 +229,9 @@ body.no-scroll { overflow: hidden; }
   width: 100%; padding: 18px 0 12px; background: transparent; border: none;
   border-bottom: 1px solid var(--border-strong); color: var(--navy);
   font-family: 'Inter', sans-serif; font-size: 15px; outline: none; transition: border-color 0.3s;
-  -webkit-appearance: none; /* Removes iOS default styling */
+  -webkit-appearance: none; 
   appearance: none;
-  border-radius: 0; /* Removes iOS default rounding */
+  border-radius: 0; 
 }
 .form-field label {
   position: absolute; left: 0; top: 18px; font-size: 14px; color: var(--text-muted);
@@ -285,8 +285,8 @@ body.no-scroll { overflow: hidden; }
 .hero-section { 
   position: relative; 
   min-height: 100vh; 
-  min-height: 100svh; /* Modern browsers (fixes iOS address bar bug) */
-  min-height: 100dvh; /* Dynamic viewport height for newest browsers */
+  min-height: 100svh; 
+  min-height: 100dvh; 
   display: flex; align-items: center; padding-top: 120px; padding-bottom: 60px; overflow: hidden; 
 }
 .hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 80%; height: 60%; background: radial-gradient(circle, rgba(2, 68, 208, 0.08), transparent 60%); pointer-events: none; }
@@ -309,17 +309,11 @@ body.no-scroll { overflow: hidden; }
 /* Shield Visual */
 .shield-visual { position: relative; width: 100%; aspect-ratio: 1; max-width: 450px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
 .hero-logo-img { 
-  width: 68%; 
-  height: auto; 
-  z-index: 2; 
-  position: relative; 
+  width: 68%; height: auto; z-index: 2; position: relative; 
   animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 20px 40px rgba(2, 68, 208, 0.15));
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
 /* Scanning Effects */
 .scan-ring { position: absolute; inset: 15%; border: 1px solid var(--royal-dim); border-radius: 50%; opacity: 0; }
@@ -329,11 +323,16 @@ body.no-scroll { overflow: hidden; }
 .scan-line { position: absolute; left: 20%; right: 20%; height: 1px; background: var(--royal); top: 50%; animation: scan 4s ease-in-out infinite; box-shadow: 0 0 12px var(--royal); z-index: 3; mix-blend-mode: multiply; }
 @keyframes scan { 0%, 100% { top: 20%; opacity: 0; } 50% { top: 80%; opacity: 1; } }
 
-/* Stats */
-.hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+/* Stats - Changed to Dark Navy to break up white */
+.hero-stats { 
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; 
+  margin-top: 80px; padding: 60px 40px; 
+  background: var(--navy); border-radius: 16px; 
+  box-shadow: 0 20px 50px rgba(5, 21, 57, 0.15);
+}
 @media (min-width: 768px) { .hero-stats { grid-template-columns: repeat(4, 1fr); } }
-.stat-num { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(3rem, 6vw, 4.5rem); color: var(--royal); }
-.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; }
+.stat-num { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(3rem, 6vw, 4.5rem); color: var(--royal-light); }
+.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 8px; }
 
 /* Snapshot / Intro Section */
 .snapshot-section { padding: 120px 0; }
@@ -361,7 +360,7 @@ body.no-scroll { overflow: hidden; }
 .trust-teaser { padding: 120px 0; }
 .trust-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
 @media (min-width: 1024px) { .trust-grid { grid-template-columns: 1.2fr 1fr; gap: 80px; } }
-.trust-img { width: 100%; height: 500px; object-fit: cover; filter: grayscale(0.1) contrast(1.05); }
+.trust-img { width: 100%; height: 500px; object-fit: cover; filter: grayscale(0.1) contrast(1.05); border-radius: 8px; box-shadow: 0 10px 30px rgba(5, 21, 57, 0.1); }
 
 /* Generic Page Header */
 .page-header { padding: 180px 0 80px; border-bottom: 1px solid var(--border); position: relative; }
@@ -395,7 +394,7 @@ body.no-scroll { overflow: hidden; }
 
 /* Services List (Services Page) */
 .services-list { padding: 120px 0; }
-.service-row { display: grid; grid-template-columns: 80px 1fr; gap: 40px; padding: 60px 0; }
+.service-row { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 40px; padding: 60px 0; align-items: center; }
 @media (max-width: 768px) { .service-row { grid-template-columns: 1fr; gap: 20px; } }
 .service-row-num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 300; color: var(--border-strong); }
 .service-row-icon { width: 56px; height: 56px; margin-bottom: 24px; }
@@ -404,6 +403,7 @@ body.no-scroll { overflow: hidden; }
 .service-row-desc { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 32px; max-width: 700px; }
 .service-tags { display: flex; flex-wrap: wrap; gap: 12px; }
 .tag { padding: 8px 16px; border: 1px solid var(--border-strong); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; background: #fff; }
+.service-row-img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 10px 30px rgba(5, 21, 57, 0.1); background-size: cover; background-position: center; }
 .divider { height: 1px; background: var(--border); }
 
 /* Sectors Grid (Services Page) */
@@ -429,6 +429,9 @@ body.no-scroll { overflow: hidden; }
 .info-text a { color: var(--navy); text-decoration: none; transition: color 0.3s; }
 .info-text a:hover { color: var(--royal); }
 
+.contact-info-img-wrap { margin: 40px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(5, 21, 57, 0.1); }
+.contact-info-img { width: 100%; height: 100%; max-height: 300px; object-fit: cover; display: block; }
+
 .trust-badge { padding: 24px; border: 1px solid var(--royal); background: rgba(2, 68, 208, 0.03); }
 .badge-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .badge-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--royal); letter-spacing: 0.2em; text-transform: uppercase; }
@@ -452,12 +455,7 @@ body.no-scroll { overflow: hidden; }
 /* Updated Footer Logo Styles for JPG */
 .footer-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; text-decoration: none; }
 .footer-logo-img { 
-  height: 50px; 
-  width: auto; 
-  background: #ffffff; 
-  padding: 6px; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+  height: 50px; width: auto; background: #ffffff; padding: 6px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
 }
 .footer-logo .logo-text { display: flex; flex-direction: column; line-height: 1; }
 .footer-logo .logo-name { font-family: 'Fraunces', serif; font-size: 18px; color: #fff; font-weight: 500; }
@@ -531,30 +529,29 @@ body.no-scroll { overflow: hidden; }
 /* Open State */
 .faq-item.open .faq-icon { background: var(--royal); }
 .faq-item.open .faq-icon svg path { stroke: #ffffff; transition: stroke 0.3s; }
-.faq-item.open .faq-icon svg .faq-plus-v { opacity: 0; transition: opacity 0.3s; } /* Hides vertical line to make minus sign */
+.faq-item.open .faq-icon svg .faq-plus-v { opacity: 0; transition: opacity 0.3s; } 
 .faq-item.open .faq-header span { color: var(--royal); }
 
 /* ============================================================
    CLIENTS CAROUSEL (Touch & Drag Enabled)
    ============================================================ */
 .clients-carousel-section { 
-  padding: 25px 0; 
-  background: var(--bg-alt); /* Matches the FAQ section to blend perfectly */
+  padding: 100px 0; 
+  background: var(--bg-alt); 
   overflow: hidden; 
-  margin-top: -100px;
 }
 
 .carousel-wrapper { 
   width: 100%; 
   overflow-x: scroll; 
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+  -webkit-overflow-scrolling: touch; 
   cursor: grab; 
-  scrollbar-width: none; /* Hide scrollbar Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 .carousel-wrapper::-webkit-scrollbar { 
-  display: none; /* Hide scrollbar Chrome/Safari */
+  display: none; 
 }
 .carousel-wrapper:active { 
   cursor: grabbing; 
@@ -562,11 +559,6 @@ body.no-scroll { overflow: hidden; }
 
 .carousel-track { 
   display: flex; 
-  /* ==========================================
-   HOW TO CHANGE SPACE BETWEEN LOGOS:
-   Change the 'gap' value below. 
-   Currently it is 50px (reduced from 100px).
-   ========================================== */
   gap: 50px; 
   width: max-content; 
   padding: 0 50px;
@@ -580,14 +572,9 @@ body.no-scroll { overflow: hidden; }
 }
 
 .carousel-slide img { 
-  /* ==========================================
-   HOW TO CHANGE LOGO SIZE:
-   Change the 'height' value below. 
-   Currently it is 85px (increased from 70px).
-   ========================================== */
   height: 85px; 
   width: auto; 
-  pointer-events: none; /* Prevents image drag ghosting */
+  pointer-events: none; 
   user-select: none;
   transition: transform 0.4s ease;
 }
@@ -598,7 +585,19 @@ body.no-scroll { overflow: hidden; }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .carousel-track { gap: 20px; padding: 0 30px; } /* Space between logos on mobile */
+  .carousel-track { gap: 20px; padding: 0 30px; } 
   .carousel-slide { height: 80px; }
-  .carousel-slide img { height: 72px; } /* Logo size on mobile */
+  .carousel-slide img { height: 72px; } 
 }
+
+/* ============================================================
+   FLOATING BUTTONS (WhatsApp & Back to Top)
+   ============================================================ */
+.floating-buttons { position: fixed; bottom: 32px; right: 32px; z-index: 9000; display: flex; flex-direction: column; gap: 16px; }
+.float-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: all 0.3s; text-decoration: none; }
+.whatsapp-btn { background: #25D366; }
+.whatsapp-btn:hover { background: #1da851; transform: scale(1.05); }
+.back-to-top { background: var(--royal); border: none; opacity: 0; visibility: hidden; transform: translateY(20px); }
+.back-to-top svg { color: #fff; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: var(--royal-light); }
