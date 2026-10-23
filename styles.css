@@ -291,7 +291,7 @@ body.no-scroll { overflow: hidden; }
 }
 /* Hero Background Images */
 .hero-home { 
-  background-image: linear-gradient(rgba(5, 21, 57, 0.88), rgba(5, 21, 57, 0.72)), url('https://z-cdn-media.chatglm.cn/files/40dfbdb2-5021-4be5-8160-13a8cd0199f5.jpg?auth_key=1892760994-068b23269da942ae9bf5c95633e52ec5-0-5eeaa01c3e351e768dba0251553970f8');
+  background-image: linear-gradient(rgba(116, 114, 114, 0.5), rgba(0, 0, 0, 0.72)), url('https://z-cdn-media.chatglm.cn/files/40dfbdb2-5021-4be5-8160-13a8cd0199f5.jpg?auth_key=1892760994-068b23269da942ae9bf5c95633e52ec5-0-5eeaa01c3e351e768dba0251553970f8');
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
@@ -398,13 +398,13 @@ body.no-scroll { overflow: hidden; }
 
 /* Page Header Background Images */
 .page-header-about { 
-  background-image: linear-gradient(rgba(5, 21, 57, 0.88), rgba(5, 21, 57, 0.75)), url('https://z-cdn-media.chatglm.cn/files/d6fc63f6-f927-4060-9525-4948b5688418.jpg?auth_key=1892760994-5082e2bcfe8f4fd59b57d2f8440002b7-0-30aea3a7c38612618a06cb9cc53074da');
+  background-image: linear-gradient(rgba(116, 114, 114, 0.5), rgba(0, 0, 0, 0.72)), url('https://z-cdn-media.chatglm.cn/files/d6fc63f6-f927-4060-9525-4948b5688418.jpg?auth_key=1892760994-5082e2bcfe8f4fd59b57d2f8440002b7-0-30aea3a7c38612618a06cb9cc53074da');
 }
 .page-header-services { 
-  background-image: linear-gradient(rgba(5, 21, 57, 0.88), rgba(5, 21, 57, 0.75)), url('https://z-cdn-media.chatglm.cn/files/e43ca4c0-3639-421f-842a-ea3ef4ee4f33.jpg?auth_key=1892760994-6f587eb1eafb49b7bf08991ce638d9ff-0-9c4f186bb7589fafa08ec95a7e363202');
+  background-image: linear-gradient(rgba(116, 114, 114, 0.5), rgba(0, 0, 0, 0.72)), url('https://z-cdn-media.chatglm.cn/files/e43ca4c0-3639-421f-842a-ea3ef4ee4f33.jpg?auth_key=1892760994-6f587eb1eafb49b7bf08991ce638d9ff-0-9c4f186bb7589fafa08ec95a7e363202');
 }
 .page-header-contact { 
-  background-image: linear-gradient(rgba(5, 21, 57, 0.88), rgba(5, 21, 57, 0.75)), url('https://z-cdn-media.chatglm.cn/files/3de13320-2179-4619-a3eb-9434094d3bda.jpg?auth_key=1892760994-0c52f38fa0634c11b474a7e374fa864f-0-d4f771ac5e6bc42f7e289829b110a87d');
+  background-image: linear-gradient(rgba(116, 114, 114, 0.5), rgba(0, 0, 0, 0.72)), url('https://z-cdn-media.chatglm.cn/files/3de13320-2179-4619-a3eb-9434094d3bda.jpg?auth_key=1892760994-0c52f38fa0634c11b474a7e374fa864f-0-d4f771ac5e6bc42f7e289829b110a87d');
 }
 
 /* Override text colors for page headers with bg images */
